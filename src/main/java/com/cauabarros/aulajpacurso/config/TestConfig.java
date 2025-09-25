@@ -1,8 +1,10 @@
 package com.cauabarros.aulajpacurso.config;
 
+import com.cauabarros.aulajpacurso.entities.Category;
 import com.cauabarros.aulajpacurso.entities.Order;
 import com.cauabarros.aulajpacurso.entities.User;
 import com.cauabarros.aulajpacurso.entities.enums.OrderStatus;
+import com.cauabarros.aulajpacurso.repositories.CategoryRepository;
 import com.cauabarros.aulajpacurso.repositories.OrderRepository;
 import com.cauabarros.aulajpacurso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,17 @@ import java.util.Arrays;
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
     @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private OrderRepository orderRepository;
 
     public void run(String... args) throws Exception {
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
         User u1 = new User(null, "maria@gmail.com", "Maria Brown", "123456", "988888888");
         User u2 = new User(null, "alex@gmail.com", "Alex Green", "123456", "977777777");
 
@@ -30,5 +38,6 @@ public class TestConfig implements CommandLineRunner {
         Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.WAITING_PAYMENT, u1);
         userRepository.saveAll(Arrays.asList(u1, u2));
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     }
 }
