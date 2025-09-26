@@ -3,7 +3,9 @@ package com.cauabarros.aulajpacurso.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -15,6 +17,9 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Transient
+    private Set<Product> products = new HashSet<Product>();
 
     public Category() {}
     public Category(Long id, String name) {
@@ -28,6 +33,10 @@ public class Category implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public String getName() {
