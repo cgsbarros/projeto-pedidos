@@ -1,6 +1,7 @@
 package com.cauabarros.aulajpacurso.entities;
 
 import com.cauabarros.aulajpacurso.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -20,13 +21,14 @@ public class OrderItem {
         this.price = price;
     }
 
-    public Order order(){
+    @JsonIgnore
+    public Order getOrder(){
         return id.getOrder();
     }
     public void setOrder(Order order) {
         id.setOrder(order);
     }
-    public Product product(){
+    public Product getProduct(){
         return id.getProduct();
     }
     public void setProduct(Product product) {
